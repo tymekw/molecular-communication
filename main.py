@@ -105,11 +105,11 @@ class Demodulator:
         return bits
 
 
-def ber_shitty(received, expected):
+def calculate_ber(received, expected):
     all = len(received)
     bad = 0
     for index, (rec_val, exp_val) in enumerate(zip(received, expected)):
-        if int(rec_val) != exp_val:
+        if rec_val != exp_val:
             bad += 1
             print(index)
 
@@ -138,7 +138,7 @@ if __name__ == '__main__':
     print(demodulated)
     print("".join([str(i) for i in exp]))
 
-    ber_shitty(list(demodulator.demodulate(decoded)), exp)
+    calculate_ber([int(i) for i in list(demodulated)], exp)
 # # TODO
 # # 3: 423, 74, 39
 # # 2: 295, 65, 31
