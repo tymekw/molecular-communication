@@ -84,7 +84,7 @@ class Demodulator:
                 value -= self.demodulate_data[decoded_symbols[idx - 1]][1]
                 if len(decoded_symbols) > 1:
                     value -= self.demodulate_data[decoded_symbols[idx - 2]][2]
-                value -= len(decoded_symbols) * 0.00 * value
+                value -= len(decoded_symbols) * 0.001 * value
 
             difference_map = {}
             for symbol, val in self.demodulate_data.items():
