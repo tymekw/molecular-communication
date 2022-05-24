@@ -7,7 +7,7 @@
 		- transmission of modulated signal over a finite pulse width
 		- passive receiver (no chemical reaction)
 		One repeat of this simulation should take less than 10 seconds to execute on a personal computer.",
-	"Output Filename": "accord_ES_SYNC",
+	"Output Filename": "$OUTPUT_FILENAME$",
 	"Warning Override": false,
 	"Simulation Control": {
 		"Number of Repeats": 1,

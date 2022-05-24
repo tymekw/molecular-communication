@@ -16,9 +16,11 @@ for current_seed in range(1, 3):
     for mod_str in modulation_strength:
         print("dupa")
         template_with_mod_str = template_with_seed.replace("$MODULATION_STR$", str(mod_str))
+        automate_result_output_filename = "automate_results_SEED_{}_MOD_LVL_{}_MOD_STR_{}.txt".format(str(current_seed), str(2), str(mod_str))
+        final_config = template_with_mod_str.replace("$OUTPUT_FILENAME$", automate_result_output_filename)
         config_name = "automate_config_{}_{}.txt".format(str(2), str(mod_str))
         with open(ACCORD_HOME + "\\config\\{}".format(config_name), 'w+') as file:
-            file.write(template_with_mod_str)
+            file.write(final_config)
         # for i in range(0, 10):
         command = [ACCORD_EXEC, config_name]
         output = subprocess.check_output(command, cwd=ACCORD_HOME + "\\bin", shell=True)
