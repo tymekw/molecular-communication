@@ -11,7 +11,7 @@
 	"Warning Override": false,
 	"Simulation Control": {
 		"Number of Repeats": 1,
-		"Final Simulation Time": 1.5,
+		"Final Simulation Time": 6,
 		"Global Microscopic Time Step": 1e-4,
 		"Random Number Seed": $SEED$,
 		"Max Number of Progress Updates": 100

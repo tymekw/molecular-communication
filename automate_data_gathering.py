@@ -50,7 +50,7 @@ try:
                 command = [ACCORD_EXEC, config_name]
                 output = subprocess.check_output(command, cwd=ACCORD_HOME + "\\bin", shell=True)
 
-                result_full_path = ACCORD_HOME + '\\bin\\result\\' + automate_result_output_filename + \
+                result_full_path = ACCORD_HOME + '\\bin\\results\\' + automate_result_output_filename + \
                                    '_SEED{}.txt'.format(m_bit)
 
                 with open(result_full_path, 'r') as file:
@@ -69,11 +69,14 @@ try:
                 demodulated = demodulator.demodulate(decoded)
 
                 ber = calculate_ber([int(i) for i in list(demodulated)], expected_bits)
-                results += 'RESULTS_SEED_{}_MOD_LVL_{}_MOD_STR_{}\nBER: {}\n\n'.format(str(current_seed), str(m_bit),
-                                                                                       str(mod_str), str(ber))
+                results += 'RESULTS_SEED_{}_MOD_LVL_{}_MOD_STR_{}\nBER: {}\n'.format(str(current_seed), str(m_bit),
+                                                                                     str(mod_str), str(ber))
+                results += "d:{}\n".format(" ".join(demodulated))
+                results += "e:{}\n\n".format(" ".join([str(i) for i in expected_bits]))
                 print(results)
                 with open('results.txt', 'w+') as file:
                     file.write(results)
+
 except Exception as e:
     print(e)
     with open('results.txt', 'w+') as file:

@@ -44,7 +44,7 @@ def calculate_new_sync_triple(current_list, new_list, symbol_len):
 
 class Demodulator:
     def __init__(self, raw_data, symbol_len, modulation_bits, sync_seq_rep):
-        self.raw_data = [int(i) for i in raw_data.split(" ")]
+        self.raw_data = [int(i) for i in raw_data.strip().split(" ")]
         self.symbol_len = symbol_len
         self.modulation_bits = modulation_bits
         self.sync_seq_rep = sync_seq_rep
