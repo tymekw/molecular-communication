@@ -44,7 +44,7 @@ def calculate_new_sync_triple(current_list, new_list, symbol_len):
 
 class Demodulator:
     def __init__(self, raw_data, symbol_len, modulation_bits, sync_seq_rep):
-        self.raw_data = [int(i) for i in raw_data.split(" ")]
+        self.raw_data = [int(i) for i in raw_data.strip().split(" ")]
         self.symbol_len = symbol_len
         self.modulation_bits = modulation_bits
         self.sync_seq_rep = sync_seq_rep
@@ -52,7 +52,7 @@ class Demodulator:
         self.full_sync_length = self.symbol_len * 3 * (self.num_of_symbols - 1) * self.sync_seq_rep
         self.sync_data = self.raw_data[0:self.full_sync_length]
         self.user_data = self.raw_data[self.full_sync_length:]
-        self.demodulate_data = {} # {"symbol" : [number_of_molecules, impact on next symbol, impact on next +1 symbol]}
+        self.demodulate_data = {}  # {"symbol" : [number_of_molecules, impact on next symbol, impact on next +1 symbol]}
         self.user_sums = []
 
     def calculate_thresholds(self):
@@ -95,10 +95,50 @@ class Demodulator:
 
     def demodulate(self, symbols):
         # ToDo
-        modulation = {"0": "00",
-                      "1": "01",
-                      "2": "10",
-                      "3": "11"}
+        modulation = {}
+        if self.modulation_bits == 1:
+            modulation = {
+                "0": "0",
+                "1": "1"
+            }
+        if self.modulation_bits == 2:
+            modulation = {
+                "0": "00",
+                "1": "01",
+                "2": "10",
+                "3": "11"
+            }
+        if self.modulation_bits == 3:
+            modulation = {
+                "0": "000",
+                "1": "001",
+                "2": "010",
+                "3": "011",
+                "4": "100",
+                "5": "101",
+                "6": "110",
+                "7": "111"
+            }
+        if self.modulation_bits == 4:
+            modulation = {
+                "0": "0000",
+                "1": "0001",
+                "2": "0010",
+                "3": "0011",
+                "4": "0100",
+                "5": "0101",
+                "6": "0110",
+                "7": "0111",
+                "8": "1000",
+                "9": "1001",
+                "10": "1010",
+                "11": "1011",
+                "12": "1100",
+                "13": "1101",
+                "14": "1110",
+                "15": "1111"
+            }
+
         bits = ""
         for symbol in symbols:
             bits += modulation[symbol]
