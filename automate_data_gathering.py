@@ -10,7 +10,7 @@ with open('template.txt', 'r') as file:
 modulation_strength = [25, 50, 75, 100, 125, 150]
 template_str = "".join(template)
 
-for current_seed in range(1, 3):
+for current_seed in range(1, 4):
     template_str_withM_mod_level = template_str.replace("$MODULATION_BITS$", str(2))
     template_with_seed = template_str_withM_mod_level.replace("$SEED$", str(current_seed))
     for mod_str in modulation_strength:
@@ -24,5 +24,6 @@ for current_seed in range(1, 3):
         # for i in range(0, 10):
         command = [ACCORD_EXEC, config_name]
         output = subprocess.check_output(command, cwd=ACCORD_HOME + "\\bin", shell=True)
+
         print("output: ", str(output))
 
