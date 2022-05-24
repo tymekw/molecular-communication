@@ -51,7 +51,7 @@ try:
                 output = subprocess.check_output(command, cwd=ACCORD_HOME + "\\bin", shell=True)
 
                 result_full_path = ACCORD_HOME + '\\bin\\results\\' + automate_result_output_filename + \
-                                   '_SEED{}.txt'.format(m_bit)
+                                   '_SEED{}.txt'.format(current_seed)
 
                 with open(result_full_path, 'r') as file:
                     data = ''.join(file.readlines())
