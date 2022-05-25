@@ -146,6 +146,7 @@ class Demodulator:
 
 
 def calculate_ber(received, expected):
+    # expected to nasze wygenerowane bity randomowe, bez synchro
     all = min(len(received), len(expected))
     bad = 0
     indexes_with_error = []
