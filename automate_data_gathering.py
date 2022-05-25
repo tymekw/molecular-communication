@@ -8,7 +8,6 @@ sychro_map = {'1': [1, 0, 0] * 3,
               '2': [1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0] * 3,
               '3': [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0] * 3
               }
-print(len(sychro_map['3']))
 
 TEMPLATE_NAME = 'template.txt'
 current_seed = 1
@@ -16,7 +15,7 @@ current_seed = 1
 # BIT_SEQUENCE_LIST
 results = ''
 try:
-    ACCORD_HOME = "C:\\Users\\P1\\Desktop\\AcCoRD-1.4.2"
+    ACCORD_HOME = "D:\\AGH\\II STOPIEŃ\\es\\molecular"
     ACCORD_EXEC = ACCORD_HOME + "\\bin\\accord_win.exe"
     with open(TEMPLATE_NAME, 'r') as file:
         template = file.readlines()
@@ -27,7 +26,7 @@ try:
 
     template_with_seed = template_str.replace("$SEED$", str(current_seed))
     for mod_str in modulation_strength:
-        print("dupa")
+        print("!!!RUN NEXT MOD STR!!!")
         template_with_mod_str = template_with_seed.replace("$MODULATION_STR$", str(mod_str))
         for m_bit in modulation_bits:
             # BIT_SEQUENCE_LIST
@@ -50,7 +49,19 @@ try:
             # for i in range(0, 10):
             command = [ACCORD_EXEC, config_name]
             print("run command")
-            output = subprocess.check_output(command, cwd=ACCORD_HOME + "\\bin", shell=True)
+            print('SEED: {}; MOD_LVL:{} MOD_STR: {}\n'.format(str(current_seed), str(m_bit),
+                                                                                 str(mod_str)))
+            try:
+                output = subprocess.check_output(command, cwd=ACCORD_HOME + "\\bin", timeout=120)
+            except subprocess.TimeoutExpired:
+                results += 'RESULTS_SEED_{}_MOD_LVL_{}_MOD_STR_{}\nBER: 1\n'.format(str(current_seed), str(m_bit),
+                                                                                 str(mod_str))
+                results += "TIMED OUT!!!!!\n\n"
+                print('RESULTS_SEED_{}_MOD_LVL_{}_MOD_STR_{}\nBER: 1\n'.format(str(current_seed), str(m_bit),str(mod_str)))
+                print("TIMED OUT")
+                with open('results.txt', 'a+') as file:
+                    file.write(results)
+                continue
 
             result_full_path = ACCORD_HOME + '\\bin\\results\\' + automate_result_output_filename + \
                                '_SEED{}.txt'.format(current_seed)
@@ -61,7 +72,6 @@ try:
 
             x = re.findall(r'Count:\n\t\t\t\t(.*) ', data)
             resulted_data = x[0]
-            print(resulted_data)
             print("Demodulator")
             demodulator = Demodulator(raw_data=resulted_data,
                                       symbol_len=100,
@@ -79,6 +89,7 @@ try:
             ber = calculate_ber([int(i) for i in list(demodulated)], expected_bits)
             results += 'RESULTS_SEED_{}_MOD_LVL_{}_MOD_STR_{}\nBER: {}\n'.format(str(current_seed), str(m_bit),
                                                                                  str(mod_str), str(ber))
+            results += "len:{}\n".format(len(demodulated))
             results += "d:{}\n".format(" ".join(demodulated))
             results += "e:{}\n\n".format(" ".join([str(i) for i in expected_bits]))
             print(results)
