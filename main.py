@@ -146,7 +146,7 @@ class Demodulator:
 
 
 def calculate_ber(received, expected):
-    all = len(received)
+    all = min(len(received), len(expected))
     bad = 0
     indexes_with_error = []
     for index, (rec_val, exp_val) in enumerate(zip(received, expected)):
