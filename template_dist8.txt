@@ -63,41 +63,10 @@
 				"Is Molecule Type Released?": [true]
 		},
 		{
-				"Notes": "Observer at molecule source. Demonstrates that molecules quickly
-					leave the source",
-				"Is Location Defined by Regions?": false,
-				"Shape": "Sphere",
-				"Outer Boundary": [0, 0, 0, 1e-7],
-				"Is Actor Active?": false,
-				"Start Time": 1e-10,
-				"Is There Max Number of Actions?": false,
-				"Is Actor Independent?": true,
-				"Action Interval": 1e-4,
-				"Is Actor Activity Recorded?": true,
-				"Is Time Recorded with Activity?": false,
-				"Is Molecule Type Observed?": [true],
-				"Is Molecule Position Observed?": [false]
-		},
-		{
 				"Notes": "Spherical observer.",
 				"Is Location Defined by Regions?": false,
 				"Shape": "Sphere",
-				"Outer Boundary": [0, 4e-6, 0, 0.5e-6],
-				"Is Actor Active?": false,
-				"Start Time": 1e-10,
-				"Is There Max Number of Actions?": false,
-				"Is Actor Independent?": true,
-				"Action Interval": 1e-4,
-				"Is Actor Activity Recorded?": true,
-				"Is Time Recorded with Activity?": false,
-				"Is Molecule Type Observed?": [true],
-				"Is Molecule Position Observed?": [false]
-		},
-		{
-				"Notes": "Global observer.",
-				"Is Location Defined by Regions?": false,
-				"Shape": "Sphere",
-				"Outer Boundary": [0, 0, 0, 1e9999],
+				"Outer Boundary": [0, 8e-6, 0, 0.5e-6],
 				"Is Actor Active?": false,
 				"Start Time": 1e-10,
 				"Is There Max Number of Actions?": false,
