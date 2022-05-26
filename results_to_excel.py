@@ -1,7 +1,7 @@
 import csv
 import os
 
-dirs = ['results_tymek/', 'resultskuba/']
+dirs = ['results_tymek/', 'resultskuba/', 'kp-results/', 'ResultsJb/']
 results_names=['distance', 'modulation level', 'modulation strength', 'seed', 'ber']
 with open('FINAL_RESULTS.csv', 'a+', newline='') as file:
     writer = csv.writer(file, delimiter=';')
